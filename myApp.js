@@ -7,12 +7,6 @@ const PORT = process.env.PORT || 3030;
 const hidePoweredBy = require("hide-powered-by");
 
 
-// // For testing purposes only
-// app.use(express.urlencoded({action: true}));
-// app.post('/test', (req, res) => {
-//   res.json('input received: ' + req.body.input);
-// });
-
 
 
 
@@ -57,6 +51,7 @@ module.exports = app;
 app.use(hidePoweredBy());
 app.use(helmet.frameguard({action: 'deny'}));
 app.use(helmet.xssFilter());
+app.use(helmet.noSniff());
 const api = require('./server.js');
 app.use(express.static('public'));
 app.disable('strict-transport-security');
