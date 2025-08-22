@@ -6,9 +6,36 @@ const PORT = process.env.PORT || 3030;
 
 const hidePoweredBy = require("hide-powered-by");
 
+// these lines of code where just for teaching purposes 
+// app.use(hidePoweredBy());
+// app.use(helmet.frameguard({action: 'deny'}));
+// app.use(helmet.xssFilter());
+// app.use(helmet.noSniff());
+// app.use(helmet.ieNoOpen());
+// const ninetyDaysInSeconds = 90*24*60*60;
+// app.use(helmet.hsts({maxAge: ninetyDaysInSeconds, force: true}));
+// app.use(helmet.dnsPrefetchControl());
+// app.use(helmet.noCache());
+// app.use(helmet.contentSecurityPolicy({
+//   directives: {
+//     defaultSrc: ["'self'"],
+//     scriptSrc: ["'self'", 'trusted-cdn.com'],
+//   }
+// }));
 
-
-
+app.use(helmet({
+  frameguard: {
+    action: 'deny'
+    },
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", 'trusted-cdn.com'],
+      }
+    },
+    dnsPrefetchControl: false,
+  
+}));
 
 
 
@@ -48,22 +75,6 @@ const hidePoweredBy = require("hide-powered-by");
 
 
 module.exports = app;
-app.use(hidePoweredBy());
-app.use(helmet.frameguard({action: 'deny'}));
-app.use(helmet.xssFilter());
-app.use(helmet.noSniff());
-app.use(helmet.ieNoOpen());
-const ninetyDaysInSeconds = 90*24*60*60;
-app.use(helmet.hsts({maxAge: ninetyDaysInSeconds, force: true}));
-app.use(helmet.dnsPrefetchControl());
-app.use(helmet.noCache());
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", 'trusted-cdn.com'],
-  }
-}));
-
 const api = require('./server.js');
 app.use(express.static('public'));
 app.disable('strict-transport-security');
