@@ -24,17 +24,13 @@ const hidePoweredBy = require("hide-powered-by");
 // }));
 
 app.use(helmet({
-  frameguard: {
-    action: 'deny'
-    },
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", 'trusted-cdn.com'],
       }
     },
-    dnsPrefetchControl: false,
-  
+    noCache: true  
 }));
 
 
