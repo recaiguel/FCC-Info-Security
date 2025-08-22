@@ -51,6 +51,7 @@ const hidePoweredBy = require("hide-powered-by");
 
 module.exports = app;
 app.use(hidePoweredBy());
+app.use(helmet.frameguard({action: 'deny'}));
 const api = require('./server.js');
 app.use(express.static('public'));
 app.disable('strict-transport-security');
