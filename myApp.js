@@ -52,6 +52,7 @@ app.use(hidePoweredBy());
 app.use(helmet.frameguard({action: 'deny'}));
 app.use(helmet.xssFilter());
 app.use(helmet.noSniff());
+app.use(helmet.ieNoOpen());
 const api = require('./server.js');
 app.use(express.static('public'));
 app.disable('strict-transport-security');
