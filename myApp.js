@@ -4,6 +4,7 @@ const app = express();
 
 const PORT = process.env.PORT || 3030;
 
+const hidePoweredBy = require("hide-powered-by");
 
 
 
@@ -49,6 +50,7 @@ const PORT = process.env.PORT || 3030;
 
 
 module.exports = app;
+app.use(hidePoweredBy());
 const api = require('./server.js');
 app.use(express.static('public'));
 app.disable('strict-transport-security');
